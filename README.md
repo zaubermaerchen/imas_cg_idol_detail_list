@@ -4,16 +4,25 @@
 
 ## 使用法
 
-	python3 idol_detail_list.py -s セッションID カードハッシュID
+	python3 idol_detail_list.py [-h] [-n] [-s セッションID] ターゲット
 
+## コマンド引数
+### ターゲット
+JSONデータを抽出したいアイドルを指定します。  
+デフォルト時はカードのハッシュID(画像ファイル名から拡張子を除いた物)、  
+--nameオプション指定時は対象アイドルのフルネーム(すべて全角文字)を指定します。
 
 ## オプション
+### -n, --name
+カードハッシュIDの代わりにアイドル名をターゲットとして指定できるようになります。
+
 ### -s セッションID, --session_id セッションID
-ゲームから発行されたセッションID(sp_mbga_sid_12008305)を指定します。
+ゲームから発行されたセッションID(sp_mbga_sid_12008305)を指定します。  
+省略した場合は環境変数sidの値をセッションIDとして使用します。
 
 ## サンプル
 
-	$ python idol_detail_list.py -s "session_id" "4270223bf3b0fa1fe9ad07050b397f65" | jq
+	$ python3 idol_detail_list.py -n -s "session_id" "日高愛" | jq
 	[
 	  {
 	    "data": {

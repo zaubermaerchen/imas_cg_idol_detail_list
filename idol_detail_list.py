@@ -3,6 +3,7 @@ import argparse
 import urllib.request
 import re
 import os
+from idol_hash import IDOL_HASH
 
 USER_AGETNT = "Mozilla/5.0 (iPad)"
 COOKIE_FORMAT = "sp_mbga_sid_12008305=%s"
@@ -31,7 +32,8 @@ def get_detail_list(hash_id, sid):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("hash", help="target hash_id")
+    parser.add_argument("target", help="target idol")
+    parser.add_argument("-n", "--name", action='store_true', help="enable name target mode")
     parser.add_argument("-s", "--session_id", help="mobage session id")
     args = parser.parse_args()
 
@@ -39,4 +41,9 @@ if __name__ == "__main__":
     if not args.session_id is None:
         sid = args.session_id
 
-    print(get_detail_list(args.hash, sid))
+    if args.name is True:
+        hash_id = IDOL_HASH.get(args.target, None)
+    else:
+        hash_id = args.target
+
+    print(get_detail_list(hash_id, sid))
