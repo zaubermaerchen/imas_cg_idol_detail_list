@@ -2,6 +2,7 @@
 import argparse
 import urllib.request
 import re
+import os
 
 USER_AGETNT = "Mozilla/5.0 (iPad)"
 COOKIE_FORMAT = "sp_mbga_sid_12008305=%s"
@@ -31,7 +32,11 @@ def get_detail_list(hash_id, sid):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("hash", help="target hash_id")
-    parser.add_argument("-s", "--session_id", help="mobage session id", required=True)
+    parser.add_argument("-s", "--session_id", help="mobage session id")
     args = parser.parse_args()
 
-    print(get_detail_list(args.hash, args.session_id))
+    sid = os.environ.get("sid")
+    if not args.session_id is None:
+        sid = args.session_id
+
+    print(get_detail_list(args.hash, sid))
