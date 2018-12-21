@@ -16,7 +16,7 @@ def get_page_data(url, sid):
         ("Cookie", COOKIE_FORMAT % sid),
         ("User-Agent", USER_AGETNT)
     ]
-    res = req.open(MOBAGE_URL, urllib.parse.urlencode({'url': url}).encode("utf-8"))
+    res = req.open(MOBAGE_URL, urllib.parse.urlencode({'url': url}).encode("utf-8"), 5)
     if res.info()["Server"] == "connect.mobage.jp":
         raise Exception("session error")
     return res.read().decode("utf-8")
