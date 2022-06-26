@@ -8,7 +8,7 @@ from idol_hash import IDOL_HASH
 USER_AGETNT = "Mozilla/5.0 (iPad)"
 COOKIE_FORMAT = "sp_mbga_sid_12008305=%s"
 MOBAGE_URL = "http://sp.pf.mbga.jp/12008305"
-GALLERY_URL_FORMAT = "http://125.6.169.35/idolmaster/idol_gallery/idol_detail/%s"
+GALLERY_URL_FORMAT = "http://mobamas.net/idolmaster/idol_gallery/idol_detail/%s"
 
 def get_page_data(url, sid):
     req = urllib.request.build_opener()
