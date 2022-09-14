@@ -11,8 +11,7 @@ MOBAGE_URL = "http://sp.pf.mbga.jp/12008305/"
 GALLERY_URL_FORMAT = "http://mobamas.net/idolmaster/idol_gallery/idol_detail/%s"
 
 def get_page_data(url, sid):
-    params = urllib.parse.urlencode({'url': url}).encode("utf-8")
-    url = MOBAGE_URL + "?" + params.decode()
+    url = MOBAGE_URL + "?" + urllib.parse.urlencode({'url': url})
     req = urllib.request.build_opener()
     req.addheaders = [
         ("Cookie", COOKIE_FORMAT % sid),
