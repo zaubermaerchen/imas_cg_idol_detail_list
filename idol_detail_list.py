@@ -7,16 +7,18 @@ from idol_hash import IDOL_HASH
 
 USER_AGETNT = "Mozilla/5.0 (iPad)"
 COOKIE_FORMAT = "sp_mbga_sid_12008305=%s"
-MOBAGE_URL = "http://sp.pf.mbga.jp/12008305"
+MOBAGE_URL = "http://sp.pf.mbga.jp/12008305/"
 GALLERY_URL_FORMAT = "http://mobamas.net/idolmaster/idol_gallery/idol_detail/%s"
 
 def get_page_data(url, sid):
+    params = urllib.parse.urlencode({'url': url}).encode("utf-8")
+    url = MOBAGE_URL + "?" + params.decode()
     req = urllib.request.build_opener()
     req.addheaders = [
         ("Cookie", COOKIE_FORMAT % sid),
         ("User-Agent", USER_AGETNT)
     ]
-    res = req.open(MOBAGE_URL, urllib.parse.urlencode({'url': url}).encode("utf-8"), 5)
+    res = req.open(url, timeout = 5)
     if res.info()["Server"] == "connect.mobage.jp":
         raise Exception("session error")
     return res.read().decode("utf-8")
